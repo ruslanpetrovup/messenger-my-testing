@@ -1,9 +1,9 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import Message from "./Message";
-const { io } = require("socket.io-client");
+// const { io } = require("socket.io-client");
 // const socket = io(`wss://messenger-my-testing.herokuapp.com`);
-const socket = io("ws://localhost:8080");
+// const socket = io("ws://localhost:8080");
 
 const App = () => {
   const [isActive, setIsActive] = useState(false);

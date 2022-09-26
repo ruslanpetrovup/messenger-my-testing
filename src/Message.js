@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 const { io } = require("socket.io-client");
-const socket = io("ws://localhost:8080");
+const socket = io(`wss://messenger-my-testing.herokuapp.com`);
 
 const Message = ({ nameUser }) => {
   // const [idUser, setIdUser] = useState(socket.id);
