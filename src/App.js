@@ -2,7 +2,8 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import Message from "./Message";
 const { io } = require("socket.io-client");
-const socket = io(`wss://messenger-my-testing.herokuapp.com`);
+// const socket = io(`wss://messenger-my-testing.herokuapp.com`);
+const socket = io("ws://localhost:8080");
 
 const App = () => {
   const [isActive, setIsActive] = useState(false);
@@ -27,10 +28,7 @@ const App = () => {
             </button>
           </div>
         ) : (
-          <Message
-            nameUser={document.querySelector(".input-name").value}
-            socket={socket}
-          />
+          <Message nameUser={document.querySelector(".input-name").value} />
         )}
       </div>
     </div>
