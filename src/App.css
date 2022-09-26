@@ -51,6 +51,9 @@ button {
 }
 @media screen and (max-width: 480px) {
   .chat {
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
     width: 100%;
     margin: 0 auto;
     padding: 0 2px;
@@ -122,6 +125,7 @@ button {
   }
   .chat-submit {
     appearance: none;
+    margin-top: 10px;
     font-family: "Roboto", sans-serif;
     font-size: 18px;
     border: 1px solid blueviolet;
@@ -129,6 +133,7 @@ button {
     background: none;
     color: blueviolet;
     cursor: pointer;
+    border-radius: 5px;
   }
 }
 @media screen and (min-width: 480px) {

@@ -7,11 +7,11 @@ const Message = ({ nameUser }) => {
   const [socketNew, setSocketNew] = useState(socket);
 
   useEffect(() => {
-    console.log("oooooooo");
     socket.connect();
     socket.emit("login", { name: nameUser });
     return () => {
-      socket.disconnect();
+      setSocketNew(socket);
+      socket.disconnect({ name: nameUser });
     };
   }, []);
 
@@ -29,13 +29,12 @@ const Message = ({ nameUser }) => {
   const [itemMessage, setItemMessage] = useState([]);
 
   const submitMessage = () => {
-    const text = document.querySelector(".chat-message").value;
     setSocketNew(socket);
 
     socket.emit("chatmessage", {
       status: "ok",
       name: nameUser,
-      message: text,
+      message: document.querySelector(".chat-message").value,
     });
 
     setItemMessage([
@@ -47,6 +46,12 @@ const Message = ({ nameUser }) => {
     ]);
     document.querySelector(".chat-message").value = "";
   };
+
+  window.addEventListener("keypress", (e) => {
+    if (e.code !== "Enter") return;
+
+    submitMessage();
+  });
   return (
     <div className="chat">
       <div className="chat-logo">
