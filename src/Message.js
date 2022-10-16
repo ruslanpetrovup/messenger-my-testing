@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { throttle } from "throttle-debounce";
 const { io } = require("socket.io-client");
 const socket = io(`wss://messenger-my-testing.herokuapp.com`);
 
 const Message = ({ nameUser }) => {
   // const [idUser, setIdUser] = useState(socket.id);
   const [socketNew, setSocketNew] = useState(socket);
+  const chat = useRef();
 
   useEffect(() => {
     socket.connect();
@@ -29,36 +31,36 @@ const Message = ({ nameUser }) => {
   const [itemMessage, setItemMessage] = useState([]);
 
   const submitMessage = () => {
+    console.dir(chat.current);
     setSocketNew(socket);
 
     socket.emit("chatmessage", {
       status: "ok",
       name: nameUser,
-      message: document.querySelector(".chat-message").value,
+      message: chat.current.value,
     });
 
     setItemMessage([
       ...itemMessage,
       {
         name: nameUser,
-        message: document.querySelector(".chat-message").value,
+        message: chat.current.value,
       },
     ]);
-    document.querySelector(".chat-message").value = "";
+    chat.current.value = "";
+  };
+  onkeydown = (e) => {
+    if (e.code !== "Enter") return;
+    submitMessage();
   };
 
-  window.addEventListener("keypress", (e) => {
-    if (e.code !== "Enter") return;
-
-    submitMessage();
-  });
   return (
     <div className="chat">
       <div className="chat-logo">
         <ul className="chat-logo-list">
           {itemMessage.map((num, index) =>
             num.status === "login" ? (
-              <li>{num.message}</li>
+              <li key={index}>{num.message}</li>
             ) : (
               <li
                 className={`chat-logo-item${
@@ -85,7 +87,7 @@ const Message = ({ nameUser }) => {
           )}
         </ul>
       </div>
-      <textarea className="chat-message"></textarea>
+      <input type="text" className="chat-message" ref={chat} />
       <button className="chat-submit" onClick={submitMessage}>
         Отправить сообщение
       </button>
