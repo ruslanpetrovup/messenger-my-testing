@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { throttle } from "throttle-debounce";
+// import { throttle } from "throttle-debounce";
 const { io } = require("socket.io-client");
 const socket = io(`wss://messenger-my-testing.herokuapp.com`);
 
