@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-// import { throttle } from "throttle-debounce";
 const { io } = require("socket.io-client");
 const socket = io(`wss://messenger-my-testing.herokuapp.com`);
 
 const Message = ({ nameUser }) => {
-  // const [idUser, setIdUser] = useState(socket.id);
   const [socketNew, setSocketNew] = useState(socket);
   const chat = useRef();
 
