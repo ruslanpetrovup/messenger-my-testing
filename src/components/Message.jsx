@@ -30,7 +30,7 @@ const Message = ({ nameUser }) => {
   const [itemMessage, setItemMessage] = useState([]);
 
   const submitMessage = () => {
-    axios("https://messenger-my-testing.herokuapp.com/test").then((res) => {
+    axios("https://messenger-my-back.herokuapp.com/test").then((res) => {
       console.log(res);
     });
     setSocketNew(socket);
