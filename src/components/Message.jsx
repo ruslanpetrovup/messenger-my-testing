@@ -14,7 +14,7 @@ const Message = ({ nameUser }) => {
       setSocketNew(socket);
       socket.disconnect({ name: nameUser });
     };
-  }, [nameUser]);
+  }, []);
 
   socket.on("chat_message2", (data) => {
     if (data.status === "login") {
