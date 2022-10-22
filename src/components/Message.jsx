@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 const { io } = require("socket.io-client");
 const socket = io(`wss://messenger-my-testing.herokuapp.com`);
 
@@ -29,7 +30,9 @@ const Message = ({ nameUser }) => {
   const [itemMessage, setItemMessage] = useState([]);
 
   const submitMessage = () => {
-    console.dir(chat.current);
+    axios("https://messenger-my-testing.herokuapp.com/test").then((res) => {
+      console.log(res);
+    });
     setSocketNew(socket);
 
     socket.emit("chatmessage", {
