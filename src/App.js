@@ -1,6 +1,6 @@
-import "./App.css";
+import "./styles/App.css";
 import React, { useState, useRef } from "react";
-import Message from "./Message";
+import Message from "./components/Message";
 
 const App = () => {
   const inputName = useRef();
